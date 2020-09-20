@@ -4,8 +4,9 @@ on: push
 
 jobs:
   build:
-    docker:
-      - image: futtetennista/hakyll:4.12.5.1
+    runs-on: ubuntu-latest
+
+    container: futtetennista/hakyll:4.12.5.1
 
     steps:
       - name: Checkout
