@@ -1,0 +1,42 @@
+name: CLI
+
+on: pull
+
+jobs:
+  build:
+    docker:
+      - image: futtetennista/hakyll:4.12.5.1
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: 'source'
+
+      - name: Cache stack modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.stack
+          key: ${{ runner.os }}-{{ hashFiles('**/website.cabal') }}-stack
+
+      - name: Build
+        run: stack build
+
+      - name: Deploy to master branch
+        run: |
+          git config --global user.email robots@github.com
+          git config --global user.name GitHub
+          stack exec site rebuild
+          git checkout master
+          git reset --hard origin/master
+          git pull --rebase
+          # Overwrite existing files with new files
+          cp -a _site/. .
+          #  Commit
+          git add --all
+          git commit -m "[`date '+%F %T %Z'`] New release"
+          # Push
+          git push origin master:master
+
+
+
