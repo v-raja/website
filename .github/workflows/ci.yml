@@ -1,6 +1,6 @@
 name: CLI
 
-on: pull
+on: push
 
 jobs:
   build:
