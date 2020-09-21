@@ -6,7 +6,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    container: futtetennista/hakyll:4.12.5.1
+    container: futtetennista/hakyll:4.12.5.1-ext
 
     steps:
       - name: Checkout
@@ -24,7 +24,7 @@ jobs:
           key: ${{ runner.os }}-{{ hashFiles('**/website.cabal') }}-stack
 
       - name: Build
-        run: sudo stack build
+        run: stack build
         # exec site -- rebuild
         #  && stack init && stack build
 
