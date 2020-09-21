@@ -6,7 +6,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    container: futtetennista/hakyll:4.12.5.1-ext
+    container:
+      image: futtetennista/hakyll:4.12.5.1
 
     steps:
       - name: Checkout
