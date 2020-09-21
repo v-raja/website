@@ -25,7 +25,7 @@ jobs:
           key: ${{ runner.os }}-{{ hashFiles('**/website.cabal') }}-stack
 
       - name: Build
-        run: apt update && apt install sudo && && sudo /root/.local/bin/stack build --install-ghc
+        run: apt update && apt install sudo && sudo /root/.local/bin/stack build --install-ghc
         # exec site -- rebuild
         #  && stack init && stack build
 
