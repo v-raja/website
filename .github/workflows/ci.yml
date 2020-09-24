@@ -45,8 +45,9 @@ jobs:
         # git reset --hard origin/default_branch
         # git pull --rebase
         # else if deploying to a branch that is not the default branch, use
+        git remote update
         git fetch
-        git checkout origin/html
+        git checkout --track origin/html
 
         # Overwrite existing files with new files
         cp -a _site/. .
