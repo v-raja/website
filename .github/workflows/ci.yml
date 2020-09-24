@@ -1,4 +1,4 @@
-name: CLI
+name: CI
 
 on: push
 jobs:
@@ -35,21 +35,21 @@ jobs:
     - name: Build
       run: stack build --system-ghc
 
-    # - name: Deploy to master branch
-    #   run: |
-    #     git config --global user.email robots@github.com
-    #     git config --global user.name GitHub
-    #     stack exec site rebuild
-    #     git checkout html
-    #     git reset --hard origin/html
-    #     git pull --rebase
-    #     # Overwrite existing files with new files
-    #     cp -a _site/. .
-    #     #  Commit
-    #     git add --all
-    #     git commit -m "[`date '+%F %T %Z'`] New release"
-    #     # Push
-    #     git push origin html:html
+    - name: Deploy to html branch
+      run: |
+        git config --global user.email robots@github.com
+        git config --global user.name GitHub
+        stack exec site rebuild
+        git checkout origin/html
+        # git reset --hard origin/html
+        # git pull --rebase
+        # Overwrite existing files with new files
+        cp -a _site/. .
+        #  Commit
+        git add --all
+        git commit -m "[`date '+%F %T %Z'`] New release"
+        # Push
+        git push origin html:html
 
 # jobs:
 #   build:
