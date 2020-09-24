@@ -28,27 +28,27 @@ jobs:
         run: apt update && apt install sudo
 
       - name: Build
-        run: /root/.local/bin/stack setup --allow-different-user && /root/.local/bin/stack build && /root/.local/bin/stack exec site build
+        run: su && /root/.local/bin/stack setup --allow-different-user && /root/.local/bin/stack build && /root/.local/bin/stack exec site build
         # sudo /root/.local/bin/stack build --install-ghc
         # exec site -- rebuild
         #  && stack init && stack build
 
-      - name: Deploy to master branch
-        run: |
-          su
-          git config --global user.email robots@github.com
-          git config --global user.name GitHub
-          stack exec site rebuild
-          git checkout master
-          git reset --hard origin/master
-          git pull --rebase
-          # Overwrite existing files with new files
-          cp -a _site/. .
-          #  Commit
-          git add --all
-          git commit -m "[`date '+%F %T %Z'`] New release"
-          # Push
-          git push origin master:master
+      # - name: Deploy to master branch
+      #   run: |
+      #     su
+      #     git config --global user.email robots@github.com
+      #     git config --global user.name GitHub
+      #     stack exec site rebuild
+      #     git checkout master
+      #     git reset --hard origin/master
+      #     git pull --rebase
+      #     # Overwrite existing files with new files
+      #     cp -a _site/. .
+      #     #  Commit
+      #     git add --all
+      #     git commit -m "[`date '+%F %T %Z'`] New release"
+      #     # Push
+      #     git push origin master:master
 
 
 
