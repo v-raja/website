@@ -6,6 +6,9 @@ jobs:
     name: stack / ghc ${{ matrix.ghc }}
     runs-on: ubuntu-latest
     strategy:
+      # specify versions to be same as those listen in
+      # https://github.com/actions/virtual-environments/blob/master/images/linux/Ubuntu2004-README.md
+      # to save installing time in CI
       matrix:
         stack: ["2.3.3"]
         cabal: ["3.4.0.0"]
@@ -35,6 +38,9 @@ jobs:
     - name: Build
       run: stack build --system-ghc
 
+    - name: Generate SICP tables
+      run: ./scripts/gen_sicp_tables.rb
+
     - name: Deploy to html branch
       run: |
         git config --global user.email robots@github.com
@@ -53,7 +59,7 @@ jobs:
         cp -a _site/. .
         #  Commit
         git add --all
-        git commit -m "[`date '+%F %T %Z'`] New release"
+        git commit -m "[`date '+%F %T %Z'`]"
         # Push
         git push origin html:html
 
