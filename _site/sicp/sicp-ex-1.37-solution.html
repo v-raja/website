@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="../css/style.css">
+  <meta charset="utf-8">
+  <title>SICP Ex 1.37 Solution · Vivek Raja</title>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <link rel="stylesheet" href="../css/code.css">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+
+<body>
+  <div id="nav-placeholder"></div>
+
+  <div id="content">
+    <style>
+  #content {
+    margin-top: 30px;
+  }
+</style>
+<b>Exercise 1.37</b>
+<p>Q.<br />
+a. An infinite <em>continued fraction</em> is an expression of the form<br />
+<img src="../images/continued_frac_ex1-37.gif" /></p>
+<p>As an example, one can show that the infinite continued fraction expansion with the <span class="math inline">\(N_i\)</span> and the <span class="math inline">\(D_i\)</span> all equal to 1 produces <span class="math inline">\(1/\phi\)</span>, where <span class="math inline">\(\phi\)</span> is the golden ratio (described in section 1.2.2). One way to approximate an infinite continued fraction is to truncate the expansion after a given number of terms. Such a truncation – a so-called <em>k-term finite continued fraction</em> – has the form<br />
+<img src="../images/k_term_continued_frac_ex1-37.gif" /></p>
+<p>Suppose that <code>n</code> and <code>d</code> are procedures of one argument (the term index <span class="math inline">\(i\)</span>) that return the <span class="math inline">\(N_i\)</span> and <span class="math inline">\(D_i\)</span> of the terms of the continued fraction. Define a procedure <code>cont-frac</code> such that evaluating <code>(cont-frac n d k)</code> computes the value of the <span class="math inline">\(k\)</span>-term finite continued fraction. Check your procedure by approximating <span class="math inline">\(1/\phi\)</span> using</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode scheme"><code class="sourceCode scheme"><a class="sourceLine" id="cb1-1" title="1">(cont-frac (<span class="kw">lambda</span> (i) <span class="fl">1.0</span>)</a>
+<a class="sourceLine" id="cb1-2" title="2">           (<span class="kw">lambda</span> (i) <span class="fl">1.0</span>)</a>
+<a class="sourceLine" id="cb1-3" title="3">           k)</a></code></pre></div>
+<p>for successive values of <code>k</code>. How large must you make <code>k</code> in order to get an approximation that is accurate to 4 decimal places?<br />
+<br />
+b. If your <code>cont-frac</code> procedure generates a recursive process, write one that generates an iterative process. If it generates an iterative process, write one that generates a recursive process.</p>
+
+  </div>
+
+  <script type="text/javascript">
+    $(function () {
+      $("#nav-placeholder").load("/nav.html");
+    });
+  </script>
+</body>
+
+</html>

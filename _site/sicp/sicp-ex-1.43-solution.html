@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="../css/style.css">
+  <meta charset="utf-8">
+  <title>SICP Ex 1.43 Solution · Vivek Raja</title>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <link rel="stylesheet" href="../css/code.css">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+
+<body>
+  <div id="nav-placeholder"></div>
+
+  <div id="content">
+    <style>
+  #content {
+    margin-top: 30px;
+  }
+</style>
+<b>Exercise 1.43</b>
+<p>Q. If <span class="math inline">\(f\)</span> is a numerical function and <span class="math inline">\(n\)</span> is a positive integer, then we can form the <span class="math inline">\(n^{th}\)</span> repeated application of <span class="math inline">\(f\)</span>, which is defined to be the function whose value at <span class="math inline">\(x\)</span> is <span class="math inline">\(f(f(...(f(x))...))\)</span>. For example, if <span class="math inline">\(f\)</span> is the function <span class="math inline">\(x → x + 1\)</span>, then the <span class="math inline">\(n^{th}\)</span> repeated application of <span class="math inline">\(f\)</span> is the function <span class="math inline">\(x → x + n\)</span>. If <span class="math inline">\(f\)</span> is the operation of squaring a number, then the <span class="math inline">\(n^{th}\)</span> repeated application of <span class="math inline">\(f\)</span> is the function that raises its argument to the <span class="math inline">\(2^n\)</span>th power. Write a procedure that takes as inputs a procedure that computes <span class="math inline">\(f\)</span> and a positive integer <span class="math inline">\(n\)</span> and returns the procedure that computes the <span class="math inline">\(n^{th}\)</span> repeated application of <span class="math inline">\(f\)</span>. Your procedure should be able to be used as follows:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode scheme"><code class="sourceCode scheme"><a class="sourceLine" id="cb1-1" title="1">((repeated square <span class="dv">2</span>) <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="dv">625</span></a></code></pre></div>
+
+  </div>
+
+  <script type="text/javascript">
+    $(function () {
+      $("#nav-placeholder").load("/nav.html");
+    });
+  </script>
+</body>
+
+</html>

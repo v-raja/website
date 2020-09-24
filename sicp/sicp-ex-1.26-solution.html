@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="../css/style.css">
+  <meta charset="utf-8">
+  <title>SICP Ex 1.26 Solution · Vivek Raja</title>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <link rel="stylesheet" href="../css/code.css">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+
+<body>
+  <div id="nav-placeholder"></div>
+
+  <div id="content">
+    <style>
+  #content {
+    margin-top: 30px;
+  }
+</style>
+<b>Exercise 1.26</b>
+<p>Q. Louis Reasoner is having great difficulty doing exercise 1.24. His <code>fast-prime?</code> test seems to run more slowly than his <code>prime?</code> test. Louis calls his friend Eva Lu Ator over to help. When they examine Louis’s code, they find that he has rewritten the <code>expmod</code> procedure to use an explicit multiplication, rather than calling <code>square</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode scheme"><code class="sourceCode scheme"><a class="sourceLine" id="cb1-1" title="1">(<span class="ex">define</span><span class="fu"> </span>(expmod base <span class="kw">exp</span> m)</a>
+<a class="sourceLine" id="cb1-2" title="2">  (<span class="kw">cond</span> ((<span class="op">=</span> <span class="kw">exp</span> <span class="dv">0</span>) <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb1-3" title="3">        ((<span class="kw">even?</span> <span class="kw">exp</span>)</a>
+<a class="sourceLine" id="cb1-4" title="4">         (<span class="kw">remainder</span> (* (expmod base (<span class="op">/</span> <span class="kw">exp</span> <span class="dv">2</span>) m)</a>
+<a class="sourceLine" id="cb1-5" title="5">                       (expmod base (<span class="op">/</span> <span class="kw">exp</span> <span class="dv">2</span>) m))</a>
+<a class="sourceLine" id="cb1-6" title="6">                    m))</a>
+<a class="sourceLine" id="cb1-7" title="7">        (<span class="kw">else</span></a>
+<a class="sourceLine" id="cb1-8" title="8">         (<span class="kw">remainder</span> (* base (expmod base (<span class="op">-</span> <span class="kw">exp</span> <span class="dv">1</span>) m))</a>
+<a class="sourceLine" id="cb1-9" title="9">                    m))))</a></code></pre></div>
+<p>I don’t see what difference that could make," says Louis. “I do.” says Eva. “By writing the procedure like that, you have transformed the <span class="math inline">\(\Theta(\log{n})\)</span> process into a <span class="math inline">\(\Theta(n)\)</span> process.” Explain.</p>
+
+  </div>
+
+  <script type="text/javascript">
+    $(function () {
+      $("#nav-placeholder").load("/nav.html");
+    });
+  </script>
+</body>
+
+</html>

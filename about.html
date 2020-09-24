@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="./css/style.css">
+  <meta charset="utf-8">
+  <title>Home · Vivek Raja</title>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  
+  
+</head>
+
+<body>
+  <div id="nav-placeholder"></div>
+
+  <div id="content">
+    <h1>This is another page</h1>
+<h2>H2</h2>
+<h3>H3</h3>
+<p>body</p>
+<ul>
+<li>List1</li>
+<li><p>List</p></li>
+<li>Another list</li>
+<li>Another list
+<ul>
+<li>Another listttt</li>
+</ul></li>
+</ul>
+<p>I have to admit, this is pretty cool.</p>
+  </div>
+
+  <script type="text/javascript">
+    $(function () {
+      $("#nav-placeholder").load("/nav.html");
+    });
+  </script>
+</body>
+
+</html>

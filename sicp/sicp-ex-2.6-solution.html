@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="../css/style.css">
+  <meta charset="utf-8">
+  <title>SICP Ex 2.6 Solution · Vivek Raja</title>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <link rel="stylesheet" href="../css/code.css">
+
+  
+</head>
+
+<body>
+  <div id="nav-placeholder"></div>
+
+  <div id="content">
+    <style>
+  #content {
+    margin-top: 30px;
+  }
+</style>
+<b>Exercise 2.6</b>
+<p>Q. In case representing pairs as procedures wasn’t mind-boggling enough, consider that, in a language that can manipulate procedures, we can get by without numbers (at least insofar as nonnegative integers are concerned) by implementing 0 and the operation of adding 1 as</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode scheme"><code class="sourceCode scheme"><a class="sourceLine" id="cb1-1" title="1">(<span class="ex">define</span><span class="fu"> zero </span>(<span class="kw">lambda</span> (f) (<span class="kw">lambda</span> (x) x)))</a>
+<a class="sourceLine" id="cb1-2" title="2"></a>
+<a class="sourceLine" id="cb1-3" title="3">(<span class="ex">define</span><span class="fu"> </span>(add<span class="dv">-1</span> n)</a>
+<a class="sourceLine" id="cb1-4" title="4">  (<span class="kw">lambda</span> (f) (<span class="kw">lambda</span> (x) (f ((n f) x)))))</a></code></pre></div>
+<p>This representation is known as <em>Church numerals</em>, after its inventor, Alonzo Church, the logician who invented the λ calculus.</p>
+<p>Define <code>one</code> and <code>two</code> directly (not in terms of <code>zero</code> and <code>add-1</code>). (Hint: Use substitution to evaluate <code>(add-1 zero)</code>). Give a direct definition of the addition procedure + (not in terms of repeated application of <code>add-1</code>).</p>
+
+  </div>
+
+  <script type="text/javascript">
+    $(function () {
+      $("#nav-placeholder").load("/nav.html");
+    });
+  </script>
+</body>
+
+</html>
