@@ -3,4 +3,3 @@ _site
 .vscode
 dist-newstyle
 to_del
-*.lock
