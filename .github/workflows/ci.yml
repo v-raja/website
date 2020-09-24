@@ -40,8 +40,8 @@ jobs:
         git config --global user.email robots@github.com
         git config --global user.name GitHub
         stack exec site rebuild
-        git checkout master
-        git reset --hard origin/master
+        git checkout html
+        git reset --hard origin/html
         git pull --rebase
         # Overwrite existing files with new files
         cp -a _site/. .
@@ -49,7 +49,7 @@ jobs:
         git add --all
         git commit -m "[`date '+%F %T %Z'`] New release"
         # Push
-        git push origin master:master
+        git push origin html:html
 
 # jobs:
 #   build:
