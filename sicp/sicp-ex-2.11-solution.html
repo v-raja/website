@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="../css/style.css">
+  <meta charset="utf-8">
+  <title>SICP Ex 2.11 Solution · Vivek Raja</title>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <link rel="stylesheet" href="../css/code.css">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+
+<body>
+  <div id="nav-placeholder"></div>
+
+  <div id="content">
+    <style>
+  #content {
+    margin-top: 30px;
+  }
+</style>
+<b>Exercise 2.11</b>
+<p>Q. In passing, Ben also cryptically comments: “By testing the signs of the endpoints of the intervals, it is possible to break <code>mul-interval</code> into nine cases, only one of which requires more than two multiplications.” Rewrite this procedure using Ben’s suggestion.</p>
+<p>After debugging her program, Alyssa shows it to a potential user, who complains that her program solves the wrong problem. He wants a program that can deal with numbers represented as a center value and an additive tolerance; for example, he wants to work with intervals such as <span class="math inline">\(3.5 \pm 0.15\)</span> rather than <span class="math inline">\([3.35, 3.65]\)</span>. Alyssa returns to her desk and fixes this problem by supplying an alternate constructor and alternate selectors:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode scheme"><code class="sourceCode scheme"><a class="sourceLine" id="cb1-1" title="1">(<span class="ex">define</span><span class="fu"> </span>(make-center-width c w)</a>
+<a class="sourceLine" id="cb1-2" title="2">  (make-interval (<span class="op">-</span> c w) (<span class="op">+</span> c w)))</a>
+<a class="sourceLine" id="cb1-3" title="3">(<span class="ex">define</span><span class="fu"> </span>(center i)</a>
+<a class="sourceLine" id="cb1-4" title="4">  (<span class="op">/</span> (<span class="op">+</span> (lower-bound i) (upper-bound i)) <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb1-5" title="5">(<span class="ex">define</span><span class="fu"> </span>(width i)</a>
+<a class="sourceLine" id="cb1-6" title="6">  (<span class="op">/</span> (<span class="op">-</span> (upper-bound i) (lower-bound i)) <span class="dv">2</span>))</a></code></pre></div>
+<p>Unfortunately, most of Alyssa’s users are engineers. Real engineering situations usually involve measurements with only a small uncertainty, measured as the ratio of the width of the interval to the midpoint of the interval. Engineers usually specify percentage tolerances on the parameters of devices, as in the resistor specifications given earlier.</p>
+
+  </div>
+
+  <script type="text/javascript">
+    $(function () {
+      $("#nav-placeholder").load("/nav.html");
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="../css/style.css">
+  <meta charset="utf-8">
+  <title>SICP Ex 2.2 Solution · Vivek Raja</title>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <link rel="stylesheet" href="../css/code.css">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+
+<body>
+  <div id="nav-placeholder"></div>
+
+  <div id="content">
+    <style>
+  #content {
+    margin-top: 30px;
+  }
+</style>
+<b>Exercise 2.2</b>
+<p>Q. Consider the problem of representing line segments in a plane. Each segment is represented as a pair of points: a starting point and an ending point. Define a constructor <code>make-segment</code> and selectors <code>start-segment</code> and <code>end-segment</code> that define the representation of segments in terms of points. Furthermore, a point can be represented as a pair of numbers: the <span class="math inline">\(x\)</span> coordinate and the <span class="math inline">\(y\)</span> coordinate. Accordingly, specify a constructor <code>make-point</code> and selectors <code>x-point</code> and <code>y-point</code> that define this representation. Finally, using your selectors and constructors, define a procedure <code>midpoint-segment</code> that takes a line segment as argument and returns its midpoint (the point whose coordinates are the average of the coordinates of the endpoints). To try your procedures, you’ll need a way to print points:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode scheme"><code class="sourceCode scheme"><a class="sourceLine" id="cb1-1" title="1">(<span class="ex">define</span><span class="fu"> </span>(print-point p)</a>
+<a class="sourceLine" id="cb1-2" title="2">  (<span class="kw">newline</span>)</a>
+<a class="sourceLine" id="cb1-3" title="3">  (<span class="kw">display</span> <span class="st">&quot;(&quot;</span>)</a>
+<a class="sourceLine" id="cb1-4" title="4">  (<span class="kw">display</span> (x-point p))</a>
+<a class="sourceLine" id="cb1-5" title="5">  (<span class="kw">display</span> <span class="st">&quot;,&quot;</span>)</a>
+<a class="sourceLine" id="cb1-6" title="6">  (<span class="kw">display</span> (y-point p))</a>
+<a class="sourceLine" id="cb1-7" title="7">  (<span class="kw">display</span> <span class="st">&quot;)&quot;</span>))</a></code></pre></div>
+
+  </div>
+
+  <script type="text/javascript">
+    $(function () {
+      $("#nav-placeholder").load("/nav.html");
+    });
+  </script>
+</body>
+
+</html>

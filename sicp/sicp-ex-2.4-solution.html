@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="../css/style.css">
+  <meta charset="utf-8">
+  <title>SICP Ex 2.4 Solution · Vivek Raja</title>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <link rel="stylesheet" href="../css/code.css">
+
+  
+</head>
+
+<body>
+  <div id="nav-placeholder"></div>
+
+  <div id="content">
+    <style>
+  #content {
+    margin-top: 30px;
+  }
+</style>
+<b>Exercise 2.4</b>
+<p>Q. Here is an alternative procedural representation of pairs. For this representation, verify that <code>(car (cons x y))</code> yields <code>x</code> for any objects <code>x</code> and <code>y</code> .</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode scheme"><code class="sourceCode scheme"><a class="sourceLine" id="cb1-1" title="1">(<span class="ex">define</span><span class="fu"> </span>(<span class="kw">cons</span> x y)</a>
+<a class="sourceLine" id="cb1-2" title="2">  (<span class="kw">lambda</span> (m) (m x y)))</a>
+<a class="sourceLine" id="cb1-3" title="3"></a>
+<a class="sourceLine" id="cb1-4" title="4">(<span class="ex">define</span><span class="fu"> </span>(<span class="kw">car</span> z)</a>
+<a class="sourceLine" id="cb1-5" title="5">  (z (<span class="kw">lambda</span> (p q) p)))</a></code></pre></div>
+<p>What is the corresponding definition of <code>cdr</code> ? (Hint: To verify that this works, make use of the substitution model of section 1.1.5.)</p>
+
+  </div>
+
+  <script type="text/javascript">
+    $(function () {
+      $("#nav-placeholder").load("/nav.html");
+    });
+  </script>
+</body>
+
+</html>
