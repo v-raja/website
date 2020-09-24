@@ -25,16 +25,17 @@ jobs:
           key: ${{ runner.os }}-{{ hashFiles('**/website.cabal') }}-stack
 
       - name: Get root access
-        run: apt update && apt install sudo && su
+        run: apt update && apt install sudo
 
       - name: Build
-        run: sudo /root/.local/bin/stack setup && sudo /root/.local/bin/stack build && sudo /root/.local/bin/stack exec site build
+        run: /root/.local/bin/stack setup --allow-different-user && /root/.local/bin/stack build && /root/.local/bin/stack exec site build
         # sudo /root/.local/bin/stack build --install-ghc
         # exec site -- rebuild
         #  && stack init && stack build
 
       - name: Deploy to master branch
         run: |
+          su
           git config --global user.email robots@github.com
           git config --global user.name GitHub
           stack exec site rebuild
