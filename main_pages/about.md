@@ -1,7 +1,3 @@
----
-title: Home
----
-
 # This is another page
 ## H2
 ### H3
