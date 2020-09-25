@@ -38,8 +38,8 @@ jobs:
     - name: Build
       run: stack build --system-ghc
 
-    # - name: Generate SICP tables
-    #   run: ruby ./scripts/gen_sicp_tables.rb
+    - name: Generate SICP tables
+      run: ruby ./scripts/gen_sicp_tables.rb
 
     - name: Deploy to html branch
       run: |
@@ -47,16 +47,17 @@ jobs:
         git config --global user.name GitHub
         stack exec site rebuild
 
+        # Checkout static folder to allow us to switch to html branch with no
+        # problems. Not needed if html files for sicp tables aren't generated.
+        git checkout -- static/
+
         # if the branch you deploy on is the default branch of the repo, use the below
         # git reset --hard origin/default_branch
         # git pull --rebase
         # else if deploying to a branch that is not the default branch, use
         git remote update
         git fetch
-
         git checkout --track origin/html
-
-        ruby ./scripts/gen_sicp_tables.rb
 
         # Overwrite existing files with new files
         cp -a _site/. .
