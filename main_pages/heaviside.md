@@ -1,7 +1,7 @@
 When I did MIT's introductory Electrical Engineering course
 ([6.002](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-002-circuits-and-electronics-spring-2007/)),
 everything made sense until the course touched on frequency analysis using the Laplace Transform. I could understand why
-it was useful and how to apply it, but I found how its "out of the blue" nature perplexing. My curiosity brought me to
+it was useful and how to apply it, but I found its "out of the blue" origin perplexing. My curiosity brought me to
 Caltech's [EE44](https://www.youtube.com/playlist?list=PLc7Gz02Znph_HU1I9STgC4Nv0aG_jdb8Z) which used the Heaviside
 operator to analyse first and second order systems, and then coherently explained how the Laplace Transform is a special
 case of the Heaviside operator.
