@@ -76,15 +76,8 @@ codeCtx = field "code" (\i -> if "sourceCode" `isInfixOf` (itemBody i)
             else empty)
 
 --------------------------------------------------------------------------------
--- Makes "custom_css" metadata field available in templates
-customCssCtx :: Context a
-customCssCtx = field "custom_css" $ \item -> do
-    metadata <- getMetadata (itemIdentifier item)
-    return $ fromMaybe "" $ lookupString "custom_css" metadata
-
---------------------------------------------------------------------------------
 defaultCtx :: Context String
-defaultCtx = mathCtx <> codeCtx <> customCssCtx <> defaultContext
+defaultCtx = mathCtx <> codeCtx <> defaultContext
 
 --------------------------------------------------------------------------------
 dropMainPagesPrefix :: Routes
