@@ -1,10 +1,11 @@
 ---
 title: Bookshelf
+custom_css: bookshelf.css
 ---
 
 I enjoy browsing through peoples' bookshelves (I find [Patrick Collison's](https://patrickcollison.com/bookshelf) and [Andrej Karapthy's](https://www.goodreads.com/review/list/13472185-andrej-karpathy?shelf=read) particularly insightful) to get recommendations of what to read. This is meant to be my version of that. Ones that I thought were quite insightful are highlighted in green.
 
-* [*Sadhana: The Realisation of Life - Rabindranath Tagore*](https://www.goodreads.com/book/show/158435.Sadhana)
+* *[Sadhana: The Realisation of Life - Rabindranath Tagore](https://www.goodreads.com/book/show/158435.Sadhana)*
 * [*Coders at Work: Reflections on the Craft of Programming*](https://www.goodreads.com/book/show/6713575-coders-at-work)
 * [American Prometheus: The Triumph and Tragedy of J. Robert Oppenheimer - Kai Bird](https://www.goodreads.com/book/show/80571.American_Prometheus)
 * [*The Autobiography of Benjamin Franklin*](https://www.goodreads.com/book/show/52309.The_Autobiography_of_Benjamin_Franklin)

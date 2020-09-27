@@ -1,15 +1,15 @@
 b {
   font-weight: normal;
 }
+
 b a {
   color: #3A6E35;
 }
-i {
+
+em {
   font-style: normal;
 }
-i a {
+
+a em {
   color: #4982C4;
-}
-a:visited {
-  color: blue;
 }

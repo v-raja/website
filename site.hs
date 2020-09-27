@@ -23,13 +23,6 @@ main = hakyll $ do
         compile $ myPandocCompiler
             >>= loadAndApplyTemplate "templates/nav.html" defaultCtx
 
-    match "main_pages/bookshelf.md" $ do
-        route $ mainPagesRoute
-        compile $ myPandocCompiler
-            >>= loadAndApplyTemplate "templates/bookshelf.html" defaultCtx
-            >>= loadAndApplyTemplate "templates/default.html" defaultCtx
-            >>= relativizeUrls
-
     match "main_pages/index.md" $ do
         route $ mainPagesRoute
         compile $ myPandocCompiler
@@ -51,7 +44,6 @@ main = hakyll $ do
             >>= relativizeUrls
 
     match "sicp/*/*.md" $ do
-        -- preprocess $ runCommand "ruby scripts/gen_sicp_tables.rb"
         let sicpCtx = setTitleFromExNumber "title" <>
                       setExNumberFromPath "ex" <>
                       defaultCtx
@@ -84,8 +76,15 @@ codeCtx = field "code" (\i -> if "sourceCode" `isInfixOf` (itemBody i)
             else empty)
 
 --------------------------------------------------------------------------------
+-- Makes "custom_css" metadata field available in templates
+customCssCtx :: Context a
+customCssCtx = field "custom_css" $ \item -> do
+    metadata <- getMetadata (itemIdentifier item)
+    return $ fromMaybe "" $ lookupString "custom_css" metadata
+
+--------------------------------------------------------------------------------
 defaultCtx :: Context String
-defaultCtx = mathCtx <> codeCtx <> defaultContext
+defaultCtx = mathCtx <> codeCtx <> customCssCtx <> defaultContext
 
 --------------------------------------------------------------------------------
 dropMainPagesPrefix :: Routes
@@ -105,7 +104,7 @@ myPandocCompiler =
 --------------------------------------------------------------------------------
 -- Ex: if file is /a/b/1.1.md
 --     route becomes /a/b/sicp-ex-1.1-solution.html
--- Leads to better SEO on google for people to find these solutions
+-- Looks ugly, but leads to better SEO on google for people to find these solutions
 sicpRoute :: Routes
 sicpRoute = customRoute createSicpRoute
     where
