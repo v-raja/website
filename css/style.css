@@ -129,6 +129,10 @@ table {
   padding-bottom: 10px;
 }
 
+a:visited {
+  color: blue;
+}
+
 /* .math {
   indentalight: center;
 } */
