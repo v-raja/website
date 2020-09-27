@@ -1,83 +1,104 @@
 --------------------------------------------------------------------------------
 {-# LANGUAGE OverloadedStrings #-}
-import           Hakyll
+
 import           Control.Applicative (empty)
 import           Data.List           (isInfixOf)
-import           Text.Pandoc
--- import           Hakyll.Metadata (setFiled, getField)
--- For slug title
-import           Data.Maybe    (fromMaybe)
-import qualified Data.Text     as T
+import           Data.Maybe          (fromMaybe)
+import           Hakyll
+import           Text.Pandoc         (Extension (Ext_auto_identifiers),
+                                      HTMLMathMethod (MathJax),
+                                      disableExtension, readerExtensions,
+                                      writerHTMLMathMethod)
+
+-- takeBaseName, takeDirectory, and </> are imported from System.FilePath
+-- but compiler complains when trying to import </> specifically. Thus,
+-- import whole of System.FilePath
 import           System.FilePath
-import           System.Process
 
 --------------------------------------------------------------------------------
 main :: IO ()
-main = hakyll $ do
+main =
+  hakyll $ do
     match "css/*" $ do
-        route   idRoute
-        compile compressCssCompiler
-
+      route idRoute
+      compile compressCssCompiler
     match "main_pages/nav.md" $ do
-        route $ mainPagesRoute
-        compile $ myPandocCompiler
-            >>= loadAndApplyTemplate "templates/nav.html" defaultCtx
-
+      route $ mainPagesRoute
+      compile $
+        myPandocCompiler >>=
+        loadAndApplyTemplate "templates/nav.html" defaultCtx
     match "main_pages/index.md" $ do
-        route $ mainPagesRoute
-        compile $ myPandocCompiler
-            >>= loadAndApplyTemplate "templates/index.html" defaultCtx
-            >>= loadAndApplyTemplate "templates/default.html" defaultCtx
-            >>= relativizeUrls
-
+      route $ mainPagesRoute
+      compile $
+        myPandocCompiler >>=
+        loadAndApplyTemplate "templates/index.html" defaultCtx >>=
+        loadAndApplyTemplate "templates/default.html" defaultCtx >>=
+        relativizeUrls
     match "main_pages/sicp.md" $ do
-        route $ mainPagesRoute
-        compile $ myPandocCompiler
-            >>= loadAndApplyTemplate "templates/sicp.html" defaultCtx
-            >>= loadAndApplyTemplate "templates/default.html" defaultCtx
-            >>= relativizeUrls
-
+      route $ mainPagesRoute
+      compile $
+        myPandocCompiler >>=
+        loadAndApplyTemplate "templates/sicp.html" defaultCtx >>=
+        loadAndApplyTemplate "templates/default.html" defaultCtx >>=
+        relativizeUrls
     match "main_pages/*" $ do
-        route $ mainPagesRoute
-        compile $ myPandocCompiler
-            >>= loadAndApplyTemplate "templates/default.html" defaultCtx
-            >>= relativizeUrls
-
+      route $ mainPagesRoute
+      compile $
+        myPandocCompiler >>=
+        loadAndApplyTemplate "templates/default.html" defaultCtx >>=
+        relativizeUrls
     match "sicp/*/*.md" $ do
-        let sicpCtx = setTitleFromExNumber "title" <>
-                      setExNumberFromPath "ex" <>
-                      defaultCtx
-        route $ sicpRoute
-        compile $ myPandocCompiler
-            >>= loadAndApplyTemplate "templates/sicp_exercise.html" sicpCtx
-            >>= loadAndApplyTemplate "templates/default.html" sicpCtx
-            >>= relativizeUrls
-
+      let sicpCtx =
+            setTitleFromExNumber "title" <> setExNumberFromPath "ex" <>
+            defaultCtx
+      route $ sicpRoute
+      compile $
+        myPandocCompiler >>=
+        loadAndApplyTemplate "templates/sicp_exercise.html" sicpCtx >>=
+        loadAndApplyTemplate "templates/default.html" sicpCtx >>=
+        relativizeUrls
     match "templates/*" $ compile templateBodyCompiler
-
     match ("images/*" .||. "static/*") $ do
-        route   idRoute
-        compile copyFileCompiler
+      route idRoute
+      compile copyFileCompiler
 
 --------------------------------------------------------------------------------
 -- Adds MathJax JS if there is a math class in html body
 mathCtx :: Context String
-mathCtx = field "math" (\i -> if "class=\"math" `isInfixOf` (itemBody i)
-            then return $ unlines
-            ["<script src=\"https://polyfill.io/v3/polyfill.min.js?features=es6\"></script>",
-             "<script id=\"MathJax-script\" async src=\"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js\"></script>"]
-            else empty)
+mathCtx =
+  field
+    "math"
+    (\i ->
+       if "class=\"math" `isInfixOf` (itemBody i)
+         then return $
+              unlines
+                [ "<script src=\"https://polyfill.io/v3/polyfill.min.js?features=es6\"></script>"
+                , "<script id=\"MathJax-script\" async src=\"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js\"></script>"
+                ]
+         else empty)
 
 --------------------------------------------------------------------------------
 -- Adds code.css to style sheets if there is sourceCode tag in body
 codeCtx :: Context String
-codeCtx = field "code" (\i -> if "sourceCode" `isInfixOf` (itemBody i)
-            then return "<link rel=\"stylesheet\" href=\"/css/code.css\">\n"
-            else empty)
+codeCtx =
+  field
+    "code"
+    (\i ->
+       if "sourceCode" `isInfixOf` (itemBody i)
+         then return "<link rel=\"stylesheet\" href=\"/css/code.css\">\n"
+         else empty)
 
 --------------------------------------------------------------------------------
 defaultCtx :: Context String
-defaultCtx = mathCtx <> codeCtx <> defaultContext
+defaultCtx = defaultTitleCtx <> mathCtx <> codeCtx <> defaultContext
+
+--------------------------------------------------------------------------------
+-- Makes the title "Vivek Raja" if a title is not present
+defaultTitleCtx :: Context a
+defaultTitleCtx =
+  field "title" $ \item -> do
+    metadata <- getMetadata (itemIdentifier item)
+    return $ fromMaybe "Vivek Raja" $ lookupString "title" metadata
 
 --------------------------------------------------------------------------------
 dropMainPagesPrefix :: Routes
@@ -91,8 +112,13 @@ mainPagesRoute = dropMainPagesPrefix `composeRoutes` setExtension "html"
 myPandocCompiler :: Compiler (Item String)
 myPandocCompiler =
   pandocCompilerWith
-  defaultHakyllReaderOptions {readerExtensions = disableExtension Ext_auto_identifiers (readerExtensions defaultHakyllReaderOptions)}
-  defaultHakyllWriterOptions { writerHTMLMathMethod = MathJax "" }
+    defaultHakyllReaderOptions
+      { readerExtensions =
+          disableExtension
+            Ext_auto_identifiers
+            (readerExtensions defaultHakyllReaderOptions)
+      }
+    defaultHakyllWriterOptions {writerHTMLMathMethod = MathJax ""}
 
 --------------------------------------------------------------------------------
 -- Ex: if file is /a/b/1.1.md
@@ -100,9 +126,12 @@ myPandocCompiler =
 -- Looks ugly, but leads to better SEO on google for people to find these solutions
 sicpRoute :: Routes
 sicpRoute = customRoute createSicpRoute
-    where
-        createSicpRoute ident = takeDirectory (takeDirectory p) </> "sicp-ex-" ++ takeBaseName p ++ "-solution.html"
-                            where p = toFilePath ident
+  where
+    createSicpRoute ident =
+      takeDirectory (takeDirectory p) </> "sicp-ex-" ++
+      takeBaseName p ++ "-solution.html"
+      where
+        p = toFilePath ident
 
 --------------------------------------------------------------------------------
 -- Ex: if file is /a/b/1.1.md
@@ -110,8 +139,8 @@ sicpRoute = customRoute createSicpRoute
 -- Avoids having to write ex as a metadata field for each SICP exercise
 setExNumberFromPath :: String -> Context a
 setExNumberFromPath key = mapContext transform (pathField key)
-    where
-        transform path = takeBaseName path
+  where
+    transform path = takeBaseName path
 
 --------------------------------------------------------------------------------
 -- Ex: if file is /a/b/1.1.md
@@ -119,5 +148,5 @@ setExNumberFromPath key = mapContext transform (pathField key)
 -- Avoids having to write title as a metadata field for each SICP exercise
 setTitleFromExNumber :: String -> Context a
 setTitleFromExNumber key = mapContext transform (pathField key)
-    where
-        transform path = "SICP Ex " ++ takeBaseName path ++ " Solution"
+  where
+    transform path = "SICP Ex " ++ takeBaseName path ++ " Solution"

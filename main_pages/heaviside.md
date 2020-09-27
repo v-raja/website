@@ -1,3 +1,7 @@
+---
+title: Heaviside Operator
+---
+
 When I did MIT's introductory Electrical Engineering course
 ([6.002](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-002-circuits-and-electronics-spring-2007/)),
 everything made sense until the course touched on frequency analysis using the Laplace Transform. I could understand why
